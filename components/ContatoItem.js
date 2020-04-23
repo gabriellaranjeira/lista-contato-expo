@@ -1,26 +1,32 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import{Text, StyleSheet, TouchableOpacity} from 'react-native';
+import Cartao from '../components/Cartao';
+import Cores from '../Cores/Cores';
+import Medidas from '../Medidas/Medidas'
 
-const ContatoItem = (props) => {
-	return(
-	<TouchableOpacity onLongPress={props.onDelete.bind(this, props.id)}> 
-        <View style={styles.itemNaLista}>
-			<Text style={{color:"#FFF",textAlign:'center'}} >ID: {props.id}</Text>
-            <Text style={{color:"#FFF",textAlign:'center'}} >Nome: {props.nome}</Text>
-            <Text style={{color:"#FFF",textAlign:'center'}}> Telefone: {props.numero}</Text>
-        </View>
-    </TouchableOpacity> 
-	);
+const ContatoItem =(props) =>{
+    return(
+        <TouchableOpacity style={estilos.touchableStyle} onLongPress={props.onDelete.bind(this,props.id)}> 
+            <Cartao estilos={estilos.itemNaLista}>
+                <Text style={estilos.textStyle}>Nome: {props.nome}</Text>
+                <Text style={estilos.textStyle}>Telefone: {props.numero}</Text>
+            </Cartao>
+        </TouchableOpacity> 
+    );
 }
-const styles = StyleSheet.create({
-		itemNaLista: {
-			padding: 12,
-			backgroundColor: '#000',
-			borderBottomColor: '#FFF',
-			borderWidth: 1,
-			marginBottom: 8,
-			borderRadius: 8,
-		},
+const estilos = StyleSheet.create({
+    itemNaLista:{
+        width:Medidas.itemWidth,
+        maxWidth:Medidas.itemMaxW,
+        alignItems:Medidas.alignGeral,
+        backgroundColor:Cores.backItemNa,
+		marginBottom:Medidas.margemDebaixo
+      },
+	textStyle:{
+		color:Cores.FontColorCard
+	},
+	touchableStyle:{
+		marginBottom:Medidas.margemDebaixo
+	}
 });
-
 export default ContatoItem;
