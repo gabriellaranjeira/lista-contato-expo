@@ -1,26 +1,23 @@
 import React from 'react';
-import{Text, StyleSheet, TouchableOpacity} from 'react-native';
+import{Text, StyleSheet, View} from 'react-native';
 import Cartao from '../components/Cartao';
 import Cores from '../Cores/Cores';
 import Medidas from '../Medidas/Medidas'
 
-const ContatoItem =(props) =>{
-	const press = () => {
-		console.log("onPress", props.onSeleciona);
-		if(props.onSeleciona != undefined){
-			console.log("oi");
-			props.onSeleciona.bind(this,props.index);
-		}
-	}
+const ContatoCard = (props) =>{
+
     return(
-        <TouchableOpacity style={estilos.touchableStyle} onPress={props.onSeleciona.bind(this,props.index)} onLongPress={props.onDelete.bind(this,props.id)}> 
+        <View style={estilos.touchableStyle}> 
             <Cartao estilos={estilos.itemNaLista}>
+                <Text style={estilos.textStyle}>Id: {props.id}</Text>
                 <Text style={estilos.textStyle}>Nome: {props.nome}</Text>
                 <Text style={estilos.textStyle}>Telefone: {props.numero}</Text>
             </Cartao>
-        </TouchableOpacity> 
+        </View> 
     );
 }
+
+
 const estilos = StyleSheet.create({
     itemNaLista:{
         width:Medidas.itemWidth,
@@ -36,4 +33,6 @@ const estilos = StyleSheet.create({
 		marginBottom:Medidas.margemDebaixo
 	}
 });
-export default ContatoItem;
+
+
+export default ContatoCard;
