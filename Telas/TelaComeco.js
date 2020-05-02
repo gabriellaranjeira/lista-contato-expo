@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View, FlatList} from 'react-native';
+import { StyleSheet, Text, View, FlatList, Keyboard, Alert} from 'react-native';
 import ContatoItem from '../components/ContatoItem';
 import ContatoInput from '../components/ContatoInput';
 import TelaContato from './TelaContato';
@@ -11,7 +11,7 @@ const TelaComeco = (props)=>{
   const [contadorContatos, setContadorContatos] = useState(0);
   const [vizualizandoContatos, setVizualizandoContatos] = useState(false);
   const [editando, setEditando] = useState(false);
-  const [contatoSelecionado, setContatoSelecionado] = useState({nome:"", numero:0, index:0});
+  const [contatoSelecionado, setContatoSelecionado] = useState({id:0, nome:"", numero:0, index:0});
  
   //para add oque foi digitado
   const adicionarContato =  (nomeContato, numeroContato) => {
@@ -23,6 +23,7 @@ const TelaComeco = (props)=>{
       setContadorContatos(contadorContatos+1);
       return [...contatos, {key:contadorContatos.toString(), id:contato=(id) , nome:contato = (nomeContato), numero:contato = (numeroContato)}];
     });
+    Keyboard.dismiss();
   };
   
   const editarContato = (index, nome, numero) => {
@@ -39,11 +40,27 @@ const TelaComeco = (props)=>{
   
   const removerContato = (id)=>{
 	  console.log("Remove contato", id, contatos);
-    setContatos(contatos => {
-        return contatos.filter((contato)=>{
-        if(contato.id !== id){ return contato; }
-      })
-    });
+	  
+	  Alert.alert(
+      'Deseja remover o contato id: ' + id + '?',
+      '',
+      [
+        {
+          text: 'Não'
+        },
+        {
+          text: 'Sim',
+          onPress: () => {
+            setContatos(contatos => {
+				return contatos.filter((contato)=>{
+				if(contato.id !== id){ return contato; }
+			  })
+			});
+          }
+        }
+      ]
+    )
+    
   };
   
   const voltar = () => {
@@ -52,7 +69,7 @@ const TelaComeco = (props)=>{
   
   const verContato = async (index) => {
 	  
-	  const _contato = {nome:contatos[index].nome, numero:contatos[index].numero, index:index};
+	  const _contato = {id:contatos[index].id, nome:contatos[index].nome, numero:contatos[index].numero, index:index};
 	  console.log("verContato", index, _contato);
 	  await setContatoSelecionado(_contato);
 	  console.log("Setando status");
@@ -64,7 +81,7 @@ const TelaComeco = (props)=>{
    <View style={estilos.tela}>
    
    { vizualizandoContatos ? 
-   (<TelaContato editando={editando} setEditando={setEditando} nome={contatoSelecionado.nome} index={contatoSelecionado.index} numero={contatoSelecionado.numero} editarContato={editarContato} voltar={voltar}  />)
+   (<TelaContato editando={editando} setEditando={setEditando} id={contatoSelecionado.id} nome={contatoSelecionado.nome} index={contatoSelecionado.index} numero={contatoSelecionado.numero} editarContato={editarContato} voltar={voltar}  />)
    :
       (
 	  <>

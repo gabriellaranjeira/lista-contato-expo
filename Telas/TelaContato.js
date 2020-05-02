@@ -24,7 +24,7 @@ import Cores from '../Cores/Cores';
 
   return (
     
-  <View style={{width:'100%'}}>
+  <View style={estilos.tela}>
   {	!props.editando ? (
   <>
 	  <Text style={estilos.titulo}>Editar contato</Text>
