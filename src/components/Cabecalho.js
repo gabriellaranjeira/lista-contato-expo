@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import Cores from '../Cores/Cores';
-import Medidas from '../Medidas/Medidas'
+import Cores from '../assets/Cores/Cores';
+import Medidas from '../assets/Medidas/Medidas'
 
 const Cabecalho =(props)=>{
     return(

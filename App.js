@@ -1,20 +1,21 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import TelaComeco from './Telas/TelaComeco';
-import Cabecalho from './components/Cabecalho';
-import Medidas from './Medidas/Medidas'
+import ContatosNavigator from './src/navigation/ContatosNavigator';
+import { createStore,  combineReducers, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
+import reduxThunk from 'redux-thunk';
+import contatosReducer from './src/store/contatos-reducer';
 
-export default function App() {
-  return (
-    <View style={estilos.tela}>
-      <Cabecalho titulo={"Lista De Contatos"}/>
-      <TelaComeco/>
-    </View>
+const rootReducer = combineReducers({
+  contatos:contatosReducer
+});
+
+const store = createStore(rootReducer, applyMiddleware(reduxThunk));
+
+export default function App() {  
+   
+  return(
+    <Provider store={store}>
+      <ContatosNavigator/>
+    </Provider>
   );
 }
-
-const estilos = StyleSheet.create({
-    tela:{
-      flex:Medidas.flexGeral
-    }
-});

@@ -1,7 +1,7 @@
 import React from 'react';
 import{View,StyleSheet} from 'react-native';
-import Cores from '../Cores/Cores';
-import Medidas from '../Medidas/Medidas'
+import Cores from '../assets/Cores/Cores';
+import Medidas from '../assets/Medidas/Medidas'
 
 const Cartao= (props)=>{
     return(
@@ -11,10 +11,11 @@ const Cartao= (props)=>{
     );
 };
 
-const estilos = StyleSheet.create({
+const estilos =StyleSheet.create({
     cartao:{
         shadowColor:Cores.shadowCartao,
-            shadowOffset:{
+        alignItems: 'flex-start'
+,            shadowOffset:{
                 width:0,
                 height:2
             },
@@ -23,8 +24,7 @@ const estilos = StyleSheet.create({
         backgroundColor:Cores.backCartao,
         elevation:Medidas.cartaoElevation,
         padding:Medidas.cartaoPadding,
-        borderRadius:Medidas.cartaoBorder,
-		
+        borderRadius:Medidas.cartaoBorder
     }
 });
 export default Cartao;

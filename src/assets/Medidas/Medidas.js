@@ -15,6 +15,13 @@ export default{
     inputPadding:2,
     inputBorderR:5,
     //ContatoItem
+    itemflex: 1,
+    itemMargin: 5,
+    itemPadding:5,
+    borderColor:'#000',
+    borderWidth:1,
+    itemmarginBottom:8,
+    borderRadius:5,
     itemWidth:300,
     itemMaxW:'100%',
     //Cartao
@@ -23,11 +30,11 @@ export default{
     cartaoElevation:4,
     cartaoPadding:15,
     cartaoBorder:15,
+    cartaoPadding: 10,
     //Cabecalho
     cabecalhoWidth:'100%',
     cabecalhoHeigth:95,
     cabecalhoPadding:40,
     cabecalhoJustify:'center',
-    tituloFontS:22,
-	margemDebaixo:5
+    tituloFontS:22
 }
