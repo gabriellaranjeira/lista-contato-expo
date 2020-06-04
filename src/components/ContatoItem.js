@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import{Text, StyleSheet, TouchableOpacity, Button, Image, Alert} from 'react-native';
+import{Text, StyleSheet, TouchableOpacity, Button, Image, Alert, View} from 'react-native';
 import Cartao from '../components/Cartao';
 import Cores from '../assets/Cores/Cores';
 import Medidas from '../assets/Medidas/Medidas';
@@ -39,11 +39,23 @@ const ContatoItem =(props) =>{
     } 
     return(
         <TouchableOpacity onPress={props.onSelect} onLongPress={excluirContato} style={estilos.contatoItem}> 
+
+            
+            
             <Cartao estilos={estilos.itemNaLista}>
-                <Text style={estilos.nome}>Nome: {props.nomeContato}</Text>
-                <Text style={estilos.numero}>Telefone: {props.numeroContato}</Text>
-                
+            <View style={{width:100}}>
+            <Image
+                style={estilos.imagem} 
+                source={{uri:props.imagem}}
+            />
+            </View>
+
+            <View style={{marginLeft:10, marginTop:10}}>
+                <Text style={estilos.nome}>{props.nomeContato}</Text>
+                <Text style={estilos.numero}>{props.numeroContato}</Text> 
+                </View>
             </Cartao>
+            
         </TouchableOpacity> 
     );
 }
@@ -64,6 +76,9 @@ const estilos = StyleSheet.create({
         borderWidth:1,
         marginBottom:8,
         borderRadius:5,
+        flexDirection:'row',
+        alignItems:'flex-start',
+        justifyContent:'center'
       },
     imagem: {
         width: 70,
@@ -71,7 +86,8 @@ const estilos = StyleSheet.create({
         borderRadius: 35,
         backgroundColor: '#CCC',
         borderColor: Cores.primary,
-        borderWidth: 1
+        borderWidth: 1,
+        borderColor: '#FFF'
     },
     nome: {
         color: Cores.backItemNaColor,

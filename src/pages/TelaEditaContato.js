@@ -3,11 +3,13 @@ import { View, StyleSheet, TextInput, ScrollView, Text, Button} from 'react-nati
 import {useDispatch,useSelector} from 'react-redux';
 import * as contatosActions from '../store/contatos-actions';
 import Cores from '../assets/Cores/Cores';
+import TirarFoto from '../components/TiraFoto';
 
 
 const TelaEditaContato = (props) => {
     const[nomeContato, setNovoNome] = useState('');
     const[numeroContato, setNovoNumero] = useState('');
+    const[imagemURI, setImagemURI] = useState('');
     const contatos = useSelector(estado=>estado.contatos.contatos);
     const indexContato = useSelector(estado=>estado.contatos.contato);
 
@@ -15,6 +17,7 @@ const TelaEditaContato = (props) => {
         console.log(indexContato);
         setNovoNome(contatos[indexContato].nome);
         setNovoNumero(contatos[indexContato].numero);
+        setImagemURI(contatos[indexContato].imagemURI);
     },[]);
 
     const novoNomeAlterado = (texto) =>{
@@ -28,8 +31,12 @@ const TelaEditaContato = (props) => {
     const dispatch = useDispatch();
 
     const editarContato=()=>{
-        dispatch(contatosActions.editaContato(indexContato, nomeContato, numeroContato));
+        dispatch(contatosActions.editaContato(indexContato, nomeContato, numeroContato, imagemURI));
         props.navigation.goBack();
+    }
+
+    const fotoTirada = imagemURI=>{
+        setImagemURI(imagemURI);
     }
 
     return(
@@ -51,7 +58,11 @@ const TelaEditaContato = (props) => {
                         onChangeText={novoNumeroAlterado}
                         value={numeroContato}
                     />
-                    
+                    {
+                    imagemURI != '' ? (
+                        <TirarFoto imagem={imagemURI} onFotoTirada={fotoTirada}/>
+                        ) : (<Text></Text>)
+                    }
                     <Button 
                         title="Editar Contato"
                         color={Cores.botaoCor}

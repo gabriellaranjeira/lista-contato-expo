@@ -34,6 +34,7 @@ const TelaComeco = (props) => {
           idContato={contato.item.id}
           nomeContato={contato.item.nome}
           numeroContato={contato.item.numero}
+          imagem={contato.item.imagemURI}
           onSelect={()=>{
             console.log(contato);
             dispatch(contatosActions.setContato(contato.index));

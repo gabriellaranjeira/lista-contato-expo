@@ -23,6 +23,7 @@ const TelaContato = (props) => {
     <ContatoItem
           idContato={contato.id}
           nomeContato={contato.nome}
+          imagem={contato.imagemURI}
           numeroContato={contato.numero}
         />
     

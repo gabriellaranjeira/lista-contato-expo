@@ -9,7 +9,7 @@ const estadoInicial={
 export default(estado = estadoInicial, action)=>{
     switch (action.type) {
         case ADD_CONTATO:
-            const c = new Contato(new Date().toString(), action.dadosContato.nomeContato, action.dadosContato.numeroContato);
+            const c = new Contato(new Date().toString(), action.dadosContato.nomeContato, action.dadosContato.numeroContato, action.dadosContato.imagem);
             console.log(JSON.stringify(c))
             return{
                 contatos: estado.contatos.concat(c),
@@ -24,7 +24,7 @@ export default(estado = estadoInicial, action)=>{
         case EDT_CONTATO:
             let _contatos = estado.contatos;
             const _id = _contatos[estado.contato].id;
-            _contatos[estado.contato] = new Contato(_id, action.dadosContato.nomeContato, action.dadosContato.numeroContato);
+            _contatos[estado.contato] = new Contato(_id, action.dadosContato.nomeContato, action.dadosContato.numeroContato, action.dadosContato.imagem);
             return {
                 contatos: _contatos,
                 contato: action.indexContato

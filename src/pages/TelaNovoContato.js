@@ -3,11 +3,14 @@ import { View, StyleSheet, TextInput, ScrollView, Text, Button} from 'react-nati
 import {useDispatch, useSelector} from 'react-redux';
 import * as contatosActions from '../store/contatos-actions';
 import Cores from '../assets/Cores/Cores';
+import TirarFoto from '../components/TiraFoto';
 
 
 const TelaNovoContato = (props) => {
     const[nomeContato, setNovoNome] = useState('');
     const[numeroContato, setNovoNumero] = useState('');
+    const[imagemURI, setImagemURI] = useState();
+
 
     const novoNomeAlterado = (texto) =>{
         setNovoNome(texto);
@@ -18,9 +21,13 @@ const TelaNovoContato = (props) => {
     }
     const dispatch = useDispatch();
 
-    const adicionarContato=()=>{
-        dispatch(contatosActions.addContato(nomeContato, numeroContato));
+    const adicionarContato = () => {
+        dispatch(contatosActions.addContato(nomeContato, numeroContato, imagemURI));
         props.navigation.goBack();
+    }
+
+    const fotoTirada = imagemURI=>{
+        setImagemURI(imagemURI);
     }
 
     return(
@@ -42,6 +49,7 @@ const TelaNovoContato = (props) => {
                         onChangeText={novoNumeroAlterado}
                         value={numeroContato}
                     />
+                    <TirarFoto onFotoTirada={fotoTirada}/>
                     
                     <Button 
                         title="Salvar Contato"
