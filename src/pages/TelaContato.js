@@ -13,13 +13,14 @@ const TelaContato = (props) => {
   const indexContato = useSelector(estado=>estado.contatos.contato);
 
   useEffect(() => {
+    console.log("oi");
     console.log(indexContato);
     setContato(contatos[indexContato]);
   },[]);
 
   return(
   <View>
-    {TelaContato}
+    {/* {TelaContato} */}
     <ContatoItem
           idContato={contato.id}
           nomeContato={contato.nome}

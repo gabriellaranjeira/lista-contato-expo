@@ -10,6 +10,7 @@ const TelaEditaContato = (props) => {
     const[nomeContato, setNovoNome] = useState('');
     const[numeroContato, setNovoNumero] = useState('');
     const[imagemURI, setImagemURI] = useState('');
+    const[idContato, setIdConato] = useState('');
     const contatos = useSelector(estado=>estado.contatos.contatos);
     const indexContato = useSelector(estado=>estado.contatos.contato);
 
@@ -18,6 +19,7 @@ const TelaEditaContato = (props) => {
         setNovoNome(contatos[indexContato].nome);
         setNovoNumero(contatos[indexContato].numero);
         setImagemURI(contatos[indexContato].imagemURI);
+        setIdConato(contatos[indexContato].id);
     },[]);
 
     const novoNomeAlterado = (texto) =>{
@@ -31,7 +33,7 @@ const TelaEditaContato = (props) => {
     const dispatch = useDispatch();
 
     const editarContato=()=>{
-        dispatch(contatosActions.editaContato(indexContato, nomeContato, numeroContato, imagemURI));
+        dispatch(contatosActions.edtContato(idContato, nomeContato, numeroContato, imagemURI));
         props.navigation.goBack();
     }
 

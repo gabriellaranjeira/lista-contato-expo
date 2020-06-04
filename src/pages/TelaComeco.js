@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import { StyleSheet, Text, View, FlatList, Platform} from 'react-native';
 import ContatoItem from '../components/ContatoItem';
 import Medidas from '../assets/Medidas/Medidas';
@@ -13,7 +13,12 @@ import * as contatosActions from '../store/contatos-actions';
 
 const TelaComeco = (props) => {
   const contatos = useSelector(estado=>estado.contatos.contatos);
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
+
+      useEffect(() => {
+        dispatch(contatosActions.listarContatos())
+        console.log(contatos);
+    }, [dispatch]);
   
   const removerContato = (keyASerRemovida)=>{
     setContatos(contatos=>{
@@ -41,7 +46,6 @@ const TelaComeco = (props) => {
             props.navigation.navigate('Contato', 
             {nomeDoContato: contato.item.nome, idContato: contato.id})
           }}
-          imagem={contato.item.imagemURI}
         />
       }
     />
