@@ -1,64 +1,59 @@
 import React, { useState } from 'react';
-import { View, Button, Image, Text, StyleSheet } from 'react-native';
-import Cores from '../assets/Cores/Cores';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import Cores from '../cores/Cores';
 
 const TiraFoto = (props) => {
 
     const [imagemURI, setImagemURI] = useState();
-
-    useState(() => {
-        console.log(props);
-        setImagemURI(props.imagem);
-    }, []);
-
-    const tirarFoto = async () => {
+    
+    const tirarFoto = async() => {
         const foto = await ImagePicker.launchCameraAsync({
             allowsEditing: true,
-            aspect: [16, 9],
+            aspect:[16,9],
             quality: 1
         });
-
         //console.log(foto);
         setImagemURI(foto.uri);
         props.onFotoTirada(foto.uri);
     }
+
     return (
         <View style={estilos.principal}>
             <View style={estilos.previewDaImagem}>
-
                 {
                     !imagemURI ?
-                        <Text>Tire ou selecione uma foto.</Text>
-                        :
-                        <Image
-                            style={estilos.imagem}
-                            source={{ uri: imagemURI }}
-                        />
-                }
+                    <Text>Nenhuma Foto.</Text>
+                    :
+                    <Image 
+                    style={estilos.imagem} 
+                    source={{uri:imagemURI}}
+                />
 
+                }
             </View>
-            <Button
-                title="Tirar foto"
-                color={Cores.botaoCor}
+            <Button 
+                title='Tirar foto'
+                color={Cores.corBotao}
                 onPress={tirarFoto}
             />
         </View>
-    );
-}
+    )
+};
+
+export default TiraFoto;
 
 const estilos = StyleSheet.create({
-    principal: {
+    principal:{
         alignItems: 'center',
         marginBottom: 15
     },
-    previewDaImagem: {
+    previewDaImagem:{
         width: '100%',
         height: 200,
         justifyContent: 'center',
-        alignItems: 'center',
         marginBottom: 10,
-        borderColor: '#CCC',
+        borderColor: Cores.corHeader,
         borderWidth: 1
     },
     imagem: {
@@ -66,4 +61,3 @@ const estilos = StyleSheet.create({
         height: '100%'
     }
 });
-export default TiraFoto;
